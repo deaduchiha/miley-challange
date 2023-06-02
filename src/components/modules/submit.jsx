@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { checkWords, isCorrectWord } from "../../utils/functions";
+import { getCommonCharacters, isValidWord } from "../../utils/functions";
 import { wordsContext } from "../templates/Landing";
 
 const Submit = () => {
@@ -13,8 +13,8 @@ const Submit = () => {
   const handleSubmit = () => {
     if (lowWord.length === 5) {
       console.log("correct word");
-      if (isCorrectWord(lowWord)) {
-        const correctWord = checkWords(mainWord, lowWord);
+      if (isValidWord(lowWord)) {
+        const correctWord = getCommonCharacters(mainWord, lowWord);
 
         setAllWords([...allWords, lowWord]);
 

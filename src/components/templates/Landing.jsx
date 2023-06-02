@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { generateRandomWord } from "../../utils/functions";
+import { getRandomWord } from "../../utils/functions";
 import Submit from "../modules/submit";
 import styles from "./Landing.module.css";
 
@@ -19,12 +19,13 @@ const Landing = () => {
   const lowWord = word.toLowerCase();
 
   useEffect(() => {
-    setMainWord(generateRandomWord());
+    setMainWord(getRandomWord());
   }, []);
 
   return (
     <wordsContext.Provider value={{ lowWord, mainWord, allWords, setAllWords }}>
       <h1>{mainWord}</h1>
+
       <input
         type="text"
         value={word}
