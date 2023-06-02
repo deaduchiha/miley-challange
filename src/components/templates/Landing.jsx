@@ -19,17 +19,18 @@ const Landing = () => {
 
   return (
     <wordsContext.Provider value={{ lowWord, mainWord }}>
-      <div className={styles.test}>
-        {myWord.map((letter, index) => (
-          <h4 key={index}>{letter}</h4>
-        ))}
-      </div>
       <input
         type="text"
         value={word}
         onChange={(e) => setWord(e.target.value)}
       />
+
       <Submit />
+      <div className={styles.test}>
+        {myWord.map((letter, index) => (
+          <h4 key={index}>{letter}</h4>
+        ))}
+      </div>
     </wordsContext.Provider>
   );
 };
