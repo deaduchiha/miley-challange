@@ -1,10 +1,11 @@
 import { useContext, useEffect } from "react";
 import { getCommonCharacters, isValidWord } from "../../utils/functions";
 import { wordsContext } from "../templates/Landing";
+import UseToastify from "../../hooks/useToastify";
+import { ToastContainer } from "react-toastify";
 
 const Submit = () => {
   const { lowWord, mainWord, allWords, setAllWords } = useContext(wordsContext);
-  // console.log("my word", myWord);
 
   useEffect(() => {
     console.log(allWords);
@@ -12,23 +13,28 @@ const Submit = () => {
 
   const handleSubmit = () => {
     if (lowWord.length === 5) {
-      console.log("correct word");
       if (isValidWord(lowWord)) {
         const correctWord = getCommonCharacters(mainWord, lowWord);
 
-        setAllWords([...allWords, lowWord]);
+        if (!allWords.includes(lowWord)) {
+          setAllWords([...allWords, lowWord]);
+          console.log("common", correctWord);
+        } else {
+          UseToastify("The word is already entered.", "error");
+        }
 
         console.log("common", correctWord);
       } else {
-        console.log("please enter a valid word");
+        UseToastify("please enter a valid word.", "error");
       }
     } else {
-      console.log("Please enter five words.");
+      UseToastify("please enter 5 word.", "error");
     }
   };
   return (
     <>
       <button onClick={handleSubmit}>submit</button>
+      <ToastContainer />
     </>
   );
 };
