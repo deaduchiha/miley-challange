@@ -20,21 +20,21 @@ const Submit = () => {
           setAllWords([...allWords, lowWord]);
           console.log("common", correctWord);
         } else {
-          UseToastify("The word is already entered.", "error");
+          UseToastify("The word is already entered", "error");
         }
 
         console.log("common", correctWord);
       } else {
-        UseToastify("please enter a valid word.", "error");
+        UseToastify("please enter a valid word", "error");
       }
     } else {
-      UseToastify("please enter 5 word.", "error");
+      UseToastify("please enter 5 word", "error");
     }
   };
   return (
     <>
       <button onClick={handleSubmit}>submit</button>
-      <ToastContainer />
+      <ToastContainer autoClose={3000} />
     </>
   );
 };
