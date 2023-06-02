@@ -1,0 +1,19 @@
+.header {
+  letter-spacing: 20px;
+  text-transform: uppercase;
+}
+.test {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.test h4 {
+  border: 1px solid #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  text-transform: uppercase;
+}

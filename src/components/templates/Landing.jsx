@@ -1,18 +1,36 @@
-import { words } from "../../words";
+import { createContext, useEffect, useState } from "react";
+import { changeToArray, generateRandomWord } from "../../utils/functions";
+import Submit from "../modules/submit";
+import styles from "./Landing.module.css";
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const wordsContext = createContext();
 
 const Landing = () => {
-  const randomIndex = Math.floor(Math.random() * words.length);
+  const [mainWord, setMainWord] = useState("");
+  const myWord = changeToArray(mainWord);
 
-  // Get the random word using the random index
-  const randomWord = words[randomIndex];
+  const [word, setWord] = useState("");
+  const lowWord = word.toLowerCase();
 
-  // Display the random word
-  console.log("Random word:", randomWord);
+  useEffect(() => {
+    setMainWord(generateRandomWord());
+  }, []);
 
   return (
-    <>
-      <h1>Landing</h1>
-    </>
+    <wordsContext.Provider value={{ lowWord, mainWord }}>
+      <div className={styles.test}>
+        {myWord.map((letter, index) => (
+          <h4 key={index}>{letter}</h4>
+        ))}
+      </div>
+      <input
+        type="text"
+        value={word}
+        onChange={(e) => setWord(e.target.value)}
+      />
+      <Submit />
+    </wordsContext.Provider>
   );
 };
 
