@@ -1,11 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { checkWords, isCorrectWord } from "../../utils/functions";
 import { wordsContext } from "../templates/Landing";
 
 const Submit = () => {
-  const { lowWord, mainWord } = useContext(wordsContext);
+  const { lowWord, mainWord, allWords, setAllWords } = useContext(wordsContext);
   // console.log("my word", myWord);
-  const [allWords, setAllWords] = useState([]);
 
   useEffect(() => {
     console.log(allWords);

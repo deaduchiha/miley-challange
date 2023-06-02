@@ -2,13 +2,19 @@
   letter-spacing: 20px;
   text-transform: uppercase;
 }
-.test {
+.words {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 10px;
+  flex-direction: column;
+}
+.words div {
+  display: flex;
+  gap: 5px;
 }
 
-.test h4 {
+.words h4 {
   border: 1px solid #111;
   display: flex;
   justify-content: center;
@@ -16,4 +22,5 @@
   width: 30px;
   height: 30px;
   text-transform: uppercase;
+  flex-direction: column;
 }

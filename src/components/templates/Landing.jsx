@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { changeToArray, generateRandomWord } from "../../utils/functions";
+import { generateRandomWord } from "../../utils/functions";
 import Submit from "../modules/submit";
 import styles from "./Landing.module.css";
 
@@ -8,7 +8,12 @@ export const wordsContext = createContext();
 
 const Landing = () => {
   const [mainWord, setMainWord] = useState("");
-  const myWord = changeToArray(mainWord);
+
+  const [allWords, setAllWords] = useState([]);
+
+  const arr = allWords.map((letter) => letter.split(""));
+  console.log(allWords);
+  console.log(arr);
 
   const [word, setWord] = useState("");
   const lowWord = word.toLowerCase();
@@ -18,7 +23,8 @@ const Landing = () => {
   }, []);
 
   return (
-    <wordsContext.Provider value={{ lowWord, mainWord }}>
+    <wordsContext.Provider value={{ lowWord, mainWord, allWords, setAllWords }}>
+      <h1>{mainWord}</h1>
       <input
         type="text"
         value={word}
@@ -26,9 +32,13 @@ const Landing = () => {
       />
 
       <Submit />
-      <div className={styles.test}>
-        {myWord.map((letter, index) => (
-          <h4 key={index}>{letter}</h4>
+      <div className={styles.words}>
+        {arr.map((letters, index) => (
+          <div key={index}>
+            {letters.map((letter, index) => (
+              <h4 key={index}>{letter}</h4>
+            ))}
+          </div>
         ))}
       </div>
     </wordsContext.Provider>
