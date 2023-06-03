@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { isValidWord } from "../../utils/functions";
+import { generateBotRandomWord, isValidWord } from "../../utils/functions";
 import { wordsContext } from "../templates/Landing";
 import UseToastify from "../../hooks/useToastify";
 import { ToastContainer } from "react-toastify";
@@ -8,12 +8,20 @@ const Submit = () => {
   const { lowWord, allWords, setAllWords, mainWord, setWord } =
     useContext(wordsContext);
 
+  const botWord = generateBotRandomWord();
+
   const handleSubmit = () => {
-    console.log(mainWord);
     if (lowWord.length === 5) {
       if (isValidWord(lowWord)) {
         if (!allWords.includes(lowWord)) {
           setAllWords([...allWords, lowWord]);
+          UseToastify("Its bot turn wait please", "success");
+
+          setTimeout(function () {
+            setAllWords([...allWords, lowWord, botWord.toLocaleLowerCase()]);
+          }, 1500);
+          // setAllWords([...allWords, lowWord]);
+
           if (mainWord === lowWord) {
             UseToastify("You win game.😁🙌🏽", "success");
             setTimeout(function () {

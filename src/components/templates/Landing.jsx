@@ -28,15 +28,15 @@ const Landing = () => {
     <wordsContext.Provider
       value={{ lowWord, mainWord, allWords, setAllWords, setWord }}
     >
-      <h1>{mainWord}</h1>
+      <div className={styles.holder}>
+        <input
+          type="text"
+          value={word}
+          onChange={(e) => setWord(e.target.value)}
+        />
 
-      <input
-        type="text"
-        value={word}
-        onChange={(e) => setWord(e.target.value)}
-      />
-
-      <Submit />
+        <Submit />
+      </div>
       <div className={styles.words}>
         {arr.map((letters, index) => (
           <div key={index}>
