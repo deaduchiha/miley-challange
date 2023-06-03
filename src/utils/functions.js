@@ -27,18 +27,31 @@ const isValidWord = (word) => {
   return lowercaseWords.includes(word.toLowerCase());
 };
 
-const generateBotRandomWord = (originalWord, attempt = 0) => {
-  let randomWord = getRandomWord();
-  let commonLetters = getCommonCharacters(randomWord, originalWord);
+const generateBotRandomWord = (originalWord, difficulty, attempt = 0) => {
+  const randomWord = getRandomWord();
+  const commonLetters = getCommonCharacters(randomWord, originalWord);
 
-  if (commonLetters.length >= 3) {
-    return randomWord.toLowerCase();
+  if (difficulty === "easy") {
+    if (commonLetters.length >= 1) {
+      return randomWord.toLowerCase();
+    }
+  } else if (difficulty === "medium") {
+    if (commonLetters.length >= 2) {
+      return randomWord.toLowerCase();
+    }
+  } else if (difficulty === "hard") {
+    if (commonLetters.length >= 3) {
+      return randomWord.toLowerCase();
+    }
   }
 
   const maxAttempts = 100;
   if (attempt < maxAttempts) {
-    return generateBotRandomWord(originalWord, attempt + 1);
+    return generateBotRandomWord(originalWord, difficulty, attempt + 1);
   }
+
+  // Return a default value or handle the case when the maxAttempts limit is reached
+  return "";
 };
 
 export {

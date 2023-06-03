@@ -5,10 +5,16 @@ import UseToastify from "../../hooks/useToastify";
 import { ToastContainer } from "react-toastify";
 
 const Submit = () => {
-  const { lowWord, allWords, setAllWords, mainWord, setWord } =
-    useContext(wordsContext);
+  const {
+    lowWord,
+    allWords,
+    setAllWords,
+    mainWord,
+    setWord,
+    selectedDifficulty,
+  } = useContext(wordsContext);
 
-  const botWord = generateBotRandomWord(mainWord);
+  const botWord = generateBotRandomWord(mainWord, selectedDifficulty);
 
   const handleSubmit = () => {
     if (lowWord.length === 5) {
@@ -26,6 +32,11 @@ const Submit = () => {
             setTimeout(function () {
               setAllWords([...allWords, lowWord, botWord.toLocaleLowerCase()]);
             }, 1500);
+          } else if (botWord === mainWord) {
+            UseToastify("You lost game😢.", "error");
+            setTimeout(function () {
+              location.reload();
+            }, 3000);
           }
         } else {
           UseToastify("The word is already entered", "error");

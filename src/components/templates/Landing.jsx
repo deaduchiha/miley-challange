@@ -6,6 +6,7 @@ import {
 } from "../../utils/functions";
 import Submit from "../modules/submit";
 import styles from "./Landing.module.css";
+import Difficulty from "../modules/difficulty";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const wordsContext = createContext();
@@ -14,6 +15,7 @@ const Landing = () => {
   const [mainWord, setMainWord] = useState("");
   const [allWords, setAllWords] = useState([]);
   const [word, setWord] = useState("");
+  const [selectedDifficulty, setSelectedDifficulty] = useState("easy");
 
   const mainWordArray = convertToArray(mainWord);
 
@@ -26,8 +28,18 @@ const Landing = () => {
 
   return (
     <wordsContext.Provider
-      value={{ lowWord, mainWord, allWords, setAllWords, setWord }}
+      value={{
+        lowWord,
+        mainWord,
+        allWords,
+        setAllWords,
+        setWord,
+        setSelectedDifficulty,
+        selectedDifficulty,
+        setMainWord,
+      }}
     >
+      <Difficulty />
       <div className={styles.holder}>
         <input
           type="text"
