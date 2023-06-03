@@ -17,10 +17,10 @@ const Submit = () => {
           setAllWords([...allWords, lowWord]);
           UseToastify("Its bot turn wait please", "success");
 
-          setTimeout(function () {
-            setAllWords([...allWords, lowWord, botWord.toLocaleLowerCase()]);
-          }, 1500);
-          // setAllWords([...allWords, lowWord]);
+          mainWord !== lowWord &&
+            setTimeout(function () {
+              setAllWords([...allWords, lowWord, botWord.toLocaleLowerCase()]);
+            }, 1500);
 
           if (mainWord === lowWord) {
             UseToastify("You win game.😁🙌🏽", "success");
