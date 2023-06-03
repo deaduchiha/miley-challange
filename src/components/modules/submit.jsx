@@ -15,18 +15,17 @@ const Submit = () => {
       if (isValidWord(lowWord)) {
         if (!allWords.includes(lowWord)) {
           setAllWords([...allWords, lowWord]);
-          UseToastify("Its bot turn wait please", "success");
-
-          mainWord !== lowWord &&
-            setTimeout(function () {
-              setAllWords([...allWords, lowWord, botWord.toLocaleLowerCase()]);
-            }, 1500);
 
           if (mainWord === lowWord) {
             UseToastify("You win game.😁🙌🏽", "success");
             setTimeout(function () {
               location.reload();
             }, 3000);
+          } else if (mainWord !== lowWord) {
+            UseToastify("Its bot turn wait please", "warning");
+            setTimeout(function () {
+              setAllWords([...allWords, lowWord, botWord.toLocaleLowerCase()]);
+            }, 1500);
           }
         } else {
           UseToastify("The word is already entered", "error");

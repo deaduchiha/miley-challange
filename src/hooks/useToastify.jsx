@@ -13,6 +13,11 @@ const UseToastify = (message, type) => {
         position: toast.POSITION.TOP_CENTER,
       });
       break;
+    case "warning":
+      toast.warning(message, {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      break;
     default:
       break;
   }
