@@ -8,7 +8,7 @@ const Submit = () => {
   const { lowWord, allWords, setAllWords, mainWord, setWord } =
     useContext(wordsContext);
 
-  const botWord = generateBotRandomWord();
+  const botWord = generateBotRandomWord(mainWord);
 
   const handleSubmit = () => {
     if (lowWord.length === 5) {

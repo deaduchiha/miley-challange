@@ -27,10 +27,18 @@ const isValidWord = (word) => {
   return lowercaseWords.includes(word.toLowerCase());
 };
 
-const generateBotRandomWord = () => {
-  const randomIndex = Math.floor(Math.random() * words.length);
-  const randomWord = words[randomIndex];
-  return randomWord.toLowerCase();
+const generateBotRandomWord = (originalWord, attempt = 0) => {
+  let randomWord = getRandomWord();
+  let commonLetters = getCommonCharacters(randomWord, originalWord);
+
+  if (commonLetters.length >= 3) {
+    return randomWord.toLowerCase();
+  }
+
+  const maxAttempts = 100;
+  if (attempt < maxAttempts) {
+    return generateBotRandomWord(originalWord, attempt + 1);
+  }
 };
 
 export {
