@@ -11,11 +11,11 @@ const convertToArray = (word) => {
   return wordArray;
 };
 
-const getCommonCharacters = (correctWord, word) => {
-  const correctWordArray = convertToArray(correctWord);
+const getCommonCharacters = (randomWord, word) => {
+  const randomWordArray = convertToArray(randomWord);
   const newWordArray = convertToArray(word);
 
-  const commonCharacters = correctWordArray.filter((character) =>
+  const commonCharacters = randomWordArray.filter((character) =>
     newWordArray.includes(character)
   );
 
@@ -35,6 +35,7 @@ const generateBotRandomWord = () => {
 
 export {
   getRandomWord,
+  convertToArray,
   getCommonCharacters,
   isValidWord,
   generateBotRandomWord,

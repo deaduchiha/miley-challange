@@ -1,5 +1,9 @@
 import { createContext, useEffect, useState } from "react";
-import { getRandomWord } from "../../utils/functions";
+import {
+  convertToArray,
+  getCommonCharacters,
+  getRandomWord,
+} from "../../utils/functions";
 import Submit from "../modules/submit";
 import styles from "./Landing.module.css";
 
@@ -8,14 +12,12 @@ export const wordsContext = createContext();
 
 const Landing = () => {
   const [mainWord, setMainWord] = useState("");
-
   const [allWords, setAllWords] = useState([]);
+  const [word, setWord] = useState("");
+
+  const mainWordArray = convertToArray(mainWord);
 
   const arr = allWords.map((letter) => letter.split(""));
-  console.log(allWords);
-  console.log(arr);
-
-  const [word, setWord] = useState("");
   const lowWord = word.toLowerCase();
 
   useEffect(() => {
@@ -23,7 +25,9 @@ const Landing = () => {
   }, []);
 
   return (
-    <wordsContext.Provider value={{ lowWord, mainWord, allWords, setAllWords }}>
+    <wordsContext.Provider
+      value={{ lowWord, mainWord, allWords, setAllWords, setWord }}
+    >
       <h1>{mainWord}</h1>
 
       <input
@@ -36,8 +40,20 @@ const Landing = () => {
       <div className={styles.words}>
         {arr.map((letters, index) => (
           <div key={index}>
-            {letters.map((letter, index) => (
-              <h4 key={index}>{letter}</h4>
+            {letters.map((letter, subIndex) => (
+              <h4
+                key={subIndex}
+                style={{
+                  background:
+                    (letter === mainWordArray[subIndex] && "green") ||
+                    (getCommonCharacters(mainWord, allWords[index]).includes(
+                      letter
+                    ) &&
+                      "yellow"),
+                }}
+              >
+                {letter}
+              </h4>
             ))}
           </div>
         ))}
